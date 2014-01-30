@@ -65,4 +65,9 @@ OpenProject::Application.configure do
 
   # Send mails to browser window
   config.action_mailer.delivery_method = :letter_opener
+
+  config.to_prepare do
+    require 'allowance/user'
+    require 'allowance/project'
+  end
 end
