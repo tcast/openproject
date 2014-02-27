@@ -11,13 +11,22 @@ angular.module('openproject.workPackages.controllers')
     $scope.query.group_by = $scope.groupBy; // keep the query in sync
   });
 
+  $scope.$watch('perPage', function() {
+    $scope.query.per_page = $scope.perPage;
+  });
+
   function initialSetup() {
     $scope.projectIdentifier = gon.project_identifier;
     $scope.operatorsAndLabelsByFilterType = gon.operators_and_labels_by_filter_type;
   }
 
   function setupQuery() {
-    $scope.query = new Query(gon.query);
+    var options = {
+      page: gon.page,
+      per_page: gon.per_page
+    };
+
+    $scope.query = new Query(gon.query, options);
 
     // Columns
     $scope.columns = gon.columns;
@@ -53,6 +62,8 @@ angular.module('openproject.workPackages.controllers')
     $scope.rows = WorkPackagesTableHelper.getRows(json.work_packages, $scope.groupBy);
     $scope.totalSums = json.sums;
     $scope.groupSums = json.group_sums;
+    $scope.page = json.page;
+    $scope.perPage = json.per_page;
   };
 
   // Initially setup scope via gon

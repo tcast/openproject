@@ -43,9 +43,18 @@ See doc/COPYRIGHT.rdoc for more details.
                          total-sums="totalSums"
                          group-sums="groupSums"
                          class="list issues"
-                         with-loading="withLoading">
+                         with-loading="withLoading"
+                         query="query"
+                         setup-work-packages-table="setupWorkPackagesTable">
     </work-packages-table>
-    <work-packages-loading/>
+
+    <table-pagination per-page="perPage"
+                      page="page"
+                      rows="rows">
+    </table-pagination>
+    <work-packages-loading>
+    </work-packages-loading>
+
 
   </div>
 <% end -%>

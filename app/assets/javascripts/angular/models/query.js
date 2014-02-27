@@ -2,8 +2,9 @@ angular.module('openproject.models')
 
 .factory('Query', ['Filter', function(Filter) {
 
-  Query = function (data) {
+  Query = function (data, options) {
     angular.extend(this, data);
+    angular.extend(this, options);
 
     if (this.filters === undefined) this.filters = [];
   };
@@ -16,7 +17,9 @@ angular.module('openproject.models')
           'c[]': this.selectedColumns.map(function(column) {
             return column.name;
            }),
-          'group_by': this.group_by
+          'group_by': this.group_by,
+          'page': this.page, // These aren't on the query, hmm
+          'per_page': this.per_page // These aren't on the query, hmm
         }].concat(this.getActiveConfiguredFilters().map(function(filter) {
           return filter.toParams();
         }))
